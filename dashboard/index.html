@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar</title>
+<link rel="stylesheet" href="radar.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Token Launch Radar</h1>
+    <p class="sub">Which pre-token protocol is worth farming next — and what to do about it.</p>
+  </div>
+  <div class="asof">Snapshot <span id="asof">—</span></div>
+</header>
+
+<section class="stats" id="stats" aria-label="Board totals"></section>
+
+<section class="controls" aria-label="Board controls">
+  <input id="q" type="search" placeholder="Search name or slug…" autocomplete="off">
+  <select id="cat" aria-label="Category"><option value="">All categories</option></select>
+  <select id="chain" aria-label="Chain"><option value="">All chains</option></select>
+  <select id="status" aria-label="Status">
+    <option value="">All protocols</option>
+    <option value="pre">Pre-token only</option>
+    <option value="live">Token already trades</option>
+    <option value="wl">Watchlist only</option>
+  </select>
+  <select id="sort" aria-label="Sort by">
+    <option value="rank">Sort: rank</option>
+    <option value="value">Sort: implied value</option>
+    <option value="tvl">Sort: TVL</option>
+    <option value="change">Sort: 7-day change</option>
+  </select>
+</section>
+
+<p class="count" id="count"></p>
+
+<main>
+  <table id="board">
+    <thead>
+      <tr>
+        <th class="num">#</th>
+        <th>Protocol</th>
+        <th>Category</th>
+        <th>Chains</th>
+        <th class="num">TVL</th>
+        <th class="num">7d</th>
+        <th>Status</th>
+        <th class="num">Implied value</th>
+      </tr>
+    </thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <section id="detail" class="detail" hidden>
+    <div class="detail-head">
+      <h2 id="d-name"></h2>
+      <button id="d-close" type="button" aria-label="Close detail">×</button>
+    </div>
+    <div id="d-facts" class="facts"></div>
+    <p id="d-note" class="note"></p>
+    <h3>How to farm it</h3>
+    <ol id="d-steps" class="steps"></ol>
+  </section>
+</main>
+
+<footer>
+  <p><strong>How the value is set.</strong> Implied value = TVL × 5% × a growth factor (0.75 at −50% seven-day change, 2.0 at +200%) × an age factor (1.0 when newly listed, 1.6 after four years with no token recorded). It uses only the snapshot's own figures — TVL, seven-day growth, and how long the protocol has run with no token recorded — never a hardcoded list of names. Protocols whose token already trades sit below the pre-token board; their implied value is their recorded market cap scaled by one common factor, and the unscaled figure is shown in the detail view.</p>
+  <p><strong>What “no token” means.</strong> The snapshot records no token for a protocol on the watchlist; that is not proof it has none, and it is not a promise that one will ever be issued. Farm steps are suggestions for using a protocol, not a guarantee of any reward.</p>
+  <p>Data: DefiLlama protocol snapshot, frozen 14 November 2026. 758 protocols at or above $5M TVL; watchlist floor $50M.</p>
+</footer>
+
+<script src="rows.js"></script>
+<script src="radar.js"></script>
+</body>
+</html>
